@@ -1,0 +1,1164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Muhammad Muzamil - Java Developer</title>
+  
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            primary: {
+              50: '#f5f3ff',
+              100: '#ede9fe',
+              200: '#ddd6fe',
+              300: '#c4b5fd',
+              400: '#a78bfa',
+              500: '#8b5cf6',
+              600: '#7c3aed',
+              700: '#6d28d9',
+              800: '#5b21b6',
+              900: '#4c1d95',
+            },
+            blue: {
+              50: '#eff6ff',
+              100: '#dbeafe',
+              200: '#bfdbfe',
+              300: '#93c5fd',
+              400: '#60a5fa',
+              500: '#3b82f6',
+              600: '#2563eb',
+              700: '#1d4ed8',
+              800: '#1e40af',
+              900: '#1e3a8a',
+            },
+            teal: {
+              50: '#f0fdfa',
+              100: '#ccfbf1',
+              200: '#99f6e4',
+              300: '#5eead4',
+              400: '#2dd4bf',
+              500: '#14b8a6',
+              600: '#0d9488',
+              700: '#0f766e',
+              800: '#115e59',
+              900: '#134e4a',
+            },
+            gray: {
+              50: '#f9fafb',
+              100: '#f3f4f6',
+              200: '#e5e7eb',
+              300: '#d1d5db',
+              400: '#9ca3af',
+              500: '#6b7280',
+              600: '#4b5563',
+              700: '#374151',
+              800: '#1f2937',
+              900: '#111827',
+            }
+          }
+        }
+      }
+    }
+  </script>
+  
+  <!-- Font Awesome for icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
+  <!-- Custom styles -->
+  <style>
+    html {
+      scroll-behavior: smooth;
+    }
+    
+    body {
+      overflow-x: hidden;
+    }
+    
+    /* Custom scrollbar */
+    ::-webkit-scrollbar {
+      width: 8px;
+    }
+    
+    ::-webkit-scrollbar-track {
+      background: transparent;
+    }
+    
+    ::-webkit-scrollbar-thumb {
+      background: linear-gradient(to bottom, #8b5cf6, #3b82f6, #14b8a6);
+      border-radius: 4px;
+    }
+    
+    ::-webkit-scrollbar-thumb:hover {
+      background: linear-gradient(to bottom, #7c3aed, #2563eb, #0d9488);
+    }
+    
+    /* Gradient text utility */
+    .gradient-text {
+      background-image: linear-gradient(to right, #8b5cf6, #3b82f6, #14b8a6);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+    
+    .gradient-text-alt {
+      background-image: linear-gradient(to right, #f97316, #ec4899, #8b5cf6);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+    
+    /* Gradient button utility */
+    .gradient-button {
+      background-image: linear-gradient(to right, #8b5cf6, #3b82f6, #14b8a6);
+      transition: all 0.3s ease;
+    }
+    
+    .gradient-button:hover {
+      background-image: linear-gradient(to right, #7c3aed, #2563eb, #0d9488);
+      transform: scale(1.05);
+    }
+    
+    .gradient-button-alt {
+      background-image: linear-gradient(to right, #f97316, #ec4899, #8b5cf6);
+      transition: all 0.3s ease;
+    }
+    
+    .gradient-button-alt:hover {
+      background-image: linear-gradient(to right, #ea580c, #db2777, #7c3aed);
+      transform: scale(1.05);
+    }
+    
+    /* Smooth transitions */
+    * {
+      transition-property: background-color, border-color, color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter;
+      transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+      transition-duration: 150ms;
+    }
+    
+    /* Animation classes */
+    .fade-in {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    
+    .fade-in.active {
+      opacity: 1;
+      transform: translateY(0);
+      transition: opacity 0.5s ease, transform 0.5s ease;
+    }
+    
+    .slide-in-left {
+      opacity: 0;
+      transform: translateX(-50px);
+    }
+    
+    .slide-in-left.active {
+      opacity: 1;
+      transform: translateX(0);
+      transition: opacity 0.5s ease, transform 0.5s ease;
+    }
+    
+    .slide-in-right {
+      opacity: 0;
+      transform: translateX(50px);
+    }
+    
+    .slide-in-right.active {
+      opacity: 1;
+      transform: translateX(0);
+      transition: opacity 0.5s ease, transform 0.5s ease;
+    }
+    
+    /* Progress bar */
+    #progress-bar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      height: 4px;
+      background: linear-gradient(to right, #8b5cf6, #3b82f6, #14b8a6);
+      z-index: 100;
+      width: 0%;
+    }
+    
+    /* Project card styles */
+    .project-card {
+      opacity: 0;
+      transform: scale(0.9);
+      transition: opacity 0.5s ease, transform 0.5s ease;
+    }
+    
+    .project-card.active {
+      opacity: 1;
+      transform: scale(1);
+    }
+    
+    /* Skill card animation */
+    .skill-card {
+      transition: all 0.3s ease;
+    }
+    
+    .skill-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+    }
+    
+    .skill-tag {
+      transition: all 0.3s ease;
+    }
+    
+    .skill-tag:hover {
+      background-image: linear-gradient(to right, #8b5cf6, #3b82f6, #14b8a6);
+      color: white;
+    }
+    
+    /* Mobile menu */
+    .mobile-menu {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.3s ease;
+    }
+    
+    .mobile-menu.open {
+      max-height: 300px;
+    }
+    
+    /* Bounce animation */
+    @keyframes bounce {
+      0%, 100% {
+        transform: translateY(0);
+      }
+      50% {
+        transform: translateY(10px);
+      }
+    }
+    
+    .bounce {
+      animation: bounce 1.5s infinite;
+    }
+    
+    /* Social media icons */
+    .social-icon {
+      transition: all 0.3s ease;
+    }
+    
+    .social-icon:hover {
+      transform: translateY(-5px);
+    }
+    
+    /* Glow effect */
+    .glow {
+      box-shadow: 0 0 15px rgba(139, 92, 246, 0.5);
+      transition: box-shadow 0.3s ease;
+    }
+    
+    .glow:hover {
+      box-shadow: 0 0 30px rgba(139, 92, 246, 0.8);
+    }
+    
+    /* Light mode specific styles */
+    .light-mode {
+      background-color: #f9fafb;
+      color: #111827;
+    }
+    
+    .light-mode .bg-gray-900 {
+      background-color: #ffffff !important;
+    }
+    
+    .light-mode .bg-gray-800 {
+      background-color: #f3f4f6 !important;
+    }
+    
+    .light-mode .text-gray-300 {
+      color: #4b5563 !important;
+    }
+    
+    .light-mode .text-white {
+      color: #111827 !important;
+    }
+    
+    .light-mode .border-gray-700 {
+      border-color: #d1d5db !important;
+    }
+    
+    .light-mode .bg-gray-700 {
+      background-color: #e5e7eb !important;
+    }
+    
+    .light-mode .text-gray-200 {
+      color: #374151 !important;
+    }
+  </style>
+</head>
+<body class="bg-gray-900 text-white">
+  <!-- Progress Bar -->
+  <div id="progress-bar"></div>
+  
+  <!-- Theme Toggle -->
+  <button id="theme-toggle" class="fixed top-5 right-5 p-2 rounded-full bg-gray-800 shadow-lg z-50 transition-all duration-300 hover:scale-110" aria-label="Toggle theme">
+    <i class="fas fa-sun text-yellow-400 text-xl"></i>
+  </button>
+  
+  <!-- Navbar -->
+  <nav id="navbar" class="fixed w-full z-40 transition-all duration-300 bg-transparent">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex items-center justify-between h-16">
+        <div class="flex-shrink-0 fade-in">
+          <a href="#home" class="text-xl font-bold tracking-tighter">
+            <span class="gradient-text">Muhammad Muzamil</span>
+          </a>
+        </div>
+        
+        <div class="hidden md:block">
+          <div class="ml-10 flex items-baseline space-x-4">
+            <a href="#home" class="nav-link px-3 py-2 rounded-md text-sm font-medium text-gray-300 hover:gradient-text transition-all duration-300">
+              <i class="fas fa-home mr-1"></i> Home
+            </a>
+            <a href="#about" class="nav-link px-3 py-2 rounded-md text-sm font-medium text-gray-300 hover:gradient-text transition-all duration-300">
+              <i class="fas fa-user mr-1"></i> About
+            </a>
+            <a href="#education" class="nav-link px-3 py-2 rounded-md text-sm font-medium text-gray-300 hover:gradient-text transition-all duration-300">
+              <i class="fas fa-graduation-cap mr-1"></i> Education
+            </a>
+            <a href="#experience" class="nav-link px-3 py-2 rounded-md text-sm font-medium text-gray-300 hover:gradient-text transition-all duration-300">
+              <i class="fas fa-briefcase mr-1"></i> Experience
+            </a>
+            <a href="#skills" class="nav-link px-3 py-2 rounded-md text-sm font-medium text-gray-300 hover:gradient-text transition-all duration-300">
+              <i class="fas fa-code mr-1"></i> Skills
+            </a>
+            <a href="#projects" class="nav-link px-3 py-2 rounded-md text-sm font-medium text-gray-300 hover:gradient-text transition-all duration-300">
+              <i class="fas fa-project-diagram mr-1"></i> Projects
+            </a>
+            <a href="#contact" class="nav-link px-3 py-2 rounded-md text-sm font-medium text-gray-300 hover:gradient-text transition-all duration-300">
+              <i class="fas fa-envelope mr-1"></i> Contact
+            </a>
+          </div>
+        </div>
+        
+        <div class="md:hidden">
+          <button id="mobile-menu-button" class="inline-flex items-center justify-center p-2 rounded-md text-gray-300 hover:text-white focus:outline-none">
+            <i id="menu-icon" class="fas fa-bars text-xl"></i>
+            <i id="close-icon" class="fas fa-times text-xl hidden"></i>
+          </button>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Mobile menu -->
+    <div id="mobile-menu" class="mobile-menu md:hidden bg-gray-800">
+      <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+        <a href="#home" class="block px-3 py-2 rounded-md text-base font-medium text-gray-300 hover:text-white">
+          <i class="fas fa-home mr-2"></i> Home
+        </a>
+        <a href="#about" class="block px-3 py-2 rounded-md text-base font-medium text-gray-300 hover:text-white">
+          <i class="fas fa-user mr-2"></i> About
+        </a>
+        <a href="#education" class="block px-3 py-2 rounded-md text-base font-medium text-gray-300 hover:text-white">
+          <i class="fas fa-graduation-cap mr-2"></i> Education
+        </a>
+        <a href="#experience" class="block px-3 py-2 rounded-md text-base font-medium text-gray-300 hover:text-white">
+          <i class="fas fa-briefcase mr-2"></i> Experience
+        </a>
+        <a href="#skills" class="block px-3 py-2 rounded-md text-base font-medium text-gray-300 hover:text-white">
+          <i class="fas fa-code mr-2"></i> Skills
+        </a>
+        <a href="#projects" class="block px-3 py-2 rounded-md text-base font-medium text-gray-300 hover:text-white">
+          <i class="fas fa-project-diagram mr-2"></i> Projects
+        </a>
+        <a href="#contact" class="block px-3 py-2 rounded-md text-base font-medium text-gray-300 hover:text-white">
+          <i class="fas fa-envelope mr-2"></i> Contact
+        </a>
+      </div>
+    </div>
+  </nav>
+  
+  <!-- Hero Section -->
+  <section id="home" class="relative h-screen w-full flex items-center justify-center overflow-hidden bg-gradient-to-b from-gray-900 to-gray-800">
+    <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+      <div class="mb-8 fade-in">
+        <h1 class="text-4xl md:text-6xl font-bold mb-4">
+          <span class="gradient-text">Java Developer</span>
+        </h1>
+        <p class="text-lg md:text-xl max-w-2xl mx-auto text-gray-300">
+          Building scalable, high-performance applications with passion and precision
+        </p>
+      </div>
+      
+      <div class="flex flex-col sm:flex-row gap-4 justify-center fade-in">
+        <button class="gradient-button text-white px-6 py-3 rounded-md font-medium" onclick="document.getElementById('about').scrollIntoView({behavior: 'smooth'})">
+          <i class="fas fa-rocket mr-2"></i> Explore My Work
+        </button>
+        <button id="download-resume" class="border border-white text-white px-6 py-3 rounded-md font-medium transition-all duration-300 hover:scale-105">
+          <i class="fas fa-download mr-2"></i> Download Resume
+        </button>
+      </div>
+      
+      <div class="absolute bottom-10 left-1/2 transform -translate-x-1/2 fade-in">
+        <div class="bounce">
+          <i class="fas fa-chevron-down text-3xl text-gray-300 cursor-pointer" onclick="document.getElementById('about').scrollIntoView({behavior: 'smooth'})"></i>
+        </div>
+      </div>
+    </div>
+  </section>
+  
+  <!-- About Section -->
+  <section id="about" class="min-h-screen py-20 bg-gray-900">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-16">
+        <h2 class="text-3xl md:text-4xl font-bold mb-4 fade-in">
+          <span class="gradient-text">About Me</span>
+        </h2>
+        <div class="max-w-3xl mx-auto fade-in">
+          <p class="text-lg text-gray-300">
+            I'm a passionate Backend Java Developer with a love for building scalable, high-performance applications.
+            My journey in software development is driven by curiosity and a desire to solve complex problems.
+          </p>
+        </div>
+      </div>
+      
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+        <div class="p-6 rounded-xl bg-gray-800 shadow-xl slide-in-left glow">
+          <h3 class="text-2xl font-bold mb-4 gradient-text">
+            <i class="fas fa-user-circle mr-2"></i> My Story
+          </h3>
+          <div class="space-y-4 text-gray-300">
+            <p>
+              I specialize in Java technologies, API development, and database management, with a solid understanding
+              of frontend technologies. My approach combines technical expertise with creative problem-solving to
+              deliver robust solutions.
+            </p>
+            <p>
+              Beyond coding, I'm constantly exploring new technologies and methodologies to stay at the forefront of
+              the ever-evolving tech landscape. I believe in writing clean, maintainable code that not only works
+              efficiently but is also easy for others to understand and build upon.
+            </p>
+            <p>
+              My goal is to create software that makes a meaningful impact, whether it's streamlining business
+              processes, enhancing user experiences, or solving complex technical challenges.
+            </p>
+          </div>
+          
+          <div class="mt-6 flex space-x-4">
+            <a href="https://www.linkedin.com/in/muhammad-muzamil-b69b5b299" target="_blank" class="social-icon text-2xl text-blue-400 hover:text-blue-500">
+              <i class="fab fa-linkedin"></i>
+            </a>
+            <a href="https://github.com/Muhammad-Muzamil1" target="_blank" class="social-icon text-2xl text-gray-300 hover:text-white">
+              <i class="fab fa-github"></i>
+            </a>
+          </div>
+        </div>
+        
+        <div class="p-6 rounded-xl bg-gray-800 shadow-xl slide-in-right glow">
+          <div class="relative w-full h-64 bg-gradient-to-br from-purple-600 via-blue-500 to-teal-400 rounded-lg overflow-hidden">
+            <div class="absolute inset-0 flex items-center justify-center">
+              <div class="text-white text-center">
+                <i class="fas fa-laptop-code text-6xl mb-4"></i>
+                <h3 class="text-2xl font-bold">Java Developer</h3>
+                <p class="mt-2">Backend Specialist</p>
+              </div>
+            </div>
+            <div class="absolute inset-0 bg-black opacity-20"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  
+  <!-- Education Section -->
+  <section id="education" class="min-h-screen py-20 bg-gray-800">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-16">
+        <h2 class="text-3xl md:text-4xl font-bold mb-4 fade-in">
+          <span class="gradient-text-alt">Education</span>
+        </h2>
+        <div class="max-w-3xl mx-auto fade-in">
+          <p class="text-lg text-gray-300">
+            My academic journey and continuous learning path
+          </p>
+        </div>
+      </div>
+      
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+        <div class="p-6 rounded-xl bg-gray-900 shadow-xl fade-in glow">
+          <div class="flex items-start space-x-4">
+            <div class="flex-shrink-0">
+              <div class="w-16 h-16 rounded-full bg-gradient-to-r from-orange-500 via-pink-500 to-purple-500 flex items-center justify-center text-white">
+                <i class="fas fa-university text-2xl"></i>
+              </div>
+            </div>
+            <div>
+              <h3 class="text-xl font-bold text-white">Bachelor of Software Engineering</h3>
+              <p class="text-gray-300 mt-1">Quaid-e-Awam University of Engineering, Science & Technology</p>
+              <p class="text-gray-400 mt-1">2022 - Present</p>
+              <div class="mt-4 space-y-2">
+                <div class="flex items-center">
+                  <i class="fas fa-check-circle text-green-500 mr-2"></i>
+                  <p class="text-gray-300">Focusing on Software Development and Engineering principles</p>
+                </div>
+                <div class="flex items-center">
+                  <i class="fas fa-check-circle text-green-500 mr-2"></i>
+                  <p class="text-gray-300">Coursework in Data Structures, Algorithms, and Database Systems</p>
+                </div>
+                <div class="flex items-center">
+                  <i class="fas fa-check-circle text-green-500 mr-2"></i>
+                  <p class="text-gray-300">Participating in programming competitions and hackathons</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <div class="p-6 rounded-xl bg-gray-900 shadow-xl fade-in glow">
+          <div class="flex items-start space-x-4">
+            <div class="flex-shrink-0">
+              <div class="w-16 h-16 rounded-full bg-gradient-to-r from-orange-500 via-pink-500 to-purple-500 flex items-center justify-center text-white">
+                <i class="fas fa-laptop-code text-2xl"></i>
+              </div>
+            </div>
+            <div>
+              <h3 class="text-xl font-bold text-white">Self-Learning & Online Courses</h3>
+              <p class="text-gray-300 mt-1">Various Platforms</p>
+              <p class="text-gray-400 mt-1">2022 - Present</p>
+              <div class="mt-4 space-y-2">
+                <div class="flex items-center">
+                  <i class="fas fa-check-circle text-green-500 mr-2"></i>
+                  <p class="text-gray-300">Java Programming Masterclass</p>
+                </div>
+                <div class="flex items-center">
+                  <i class="fas fa-check-circle text-green-500 mr-2"></i>
+                  <p class="text-gray-300">Spring Boot & Spring Framework</p>
+                </div>
+                <div class="flex items-center">
+                  <i class="fas fa-check-circle text-green-500 mr-2"></i>
+                  <p class="text-gray-300">Web Development with HTML, CSS, and JavaScript</p>
+                </div>
+                <div class="flex items-center">
+                  <i class="fas fa-check-circle text-green-500 mr-2"></i>
+                  <p class="text-gray-300">Database Design and SQL</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  
+  <!-- Experience Section -->
+  <section id="experience" class="min-h-screen py-20 bg-gray-900">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-16">
+        <h2 class="text-3xl md:text-4xl font-bold mb-4 fade-in">
+          <span class="gradient-text">Experience</span>
+        </h2>
+        <div class="max-w-3xl mx-auto fade-in">
+          <p class="text-lg text-gray-300">
+            My professional journey in the world of software development
+          </p>
+        </div>
+      </div>
+      
+      <div class="max-w-3xl mx-auto">
+        <div class="p-8 rounded-xl bg-gray-800 shadow-xl fade-in glow">
+          <div class="flex items-start space-x-6">
+            <div class="flex-shrink-0">
+              <div class="w-20 h-20 rounded-full bg-gradient-to-r from-purple-500 via-blue-500 to-teal-500 flex items-center justify-center text-white">
+                <i class="fas fa-laptop-code text-3xl"></i>
+              </div>
+            </div>
+            <div>
+              <h3 class="text-2xl font-bold text-white">Java Backend Developer Intern</h3>
+              <p class="text-gray-300 mt-1">EcodeCamp - Remote</p>
+              <p class="text-gray-400 mt-1">2025</p>
+              
+              <div class="mt-6 space-y-4">
+                <div class="flex items-start">
+                  <i class="fas fa-check-circle text-green-500 mt-1 mr-3"></i>
+                  <p class="text-gray-300">Developed and maintained RESTful APIs using Spring Boot for a web-based application</p>
+                </div>
+                <div class="flex items-start">
+                  <i class="fas fa-check-circle text-green-500 mt-1 mr-3"></i>
+                  <p class="text-gray-300">Implemented authentication and authorization using Spring Security and JWT tokens</p>
+                </div>
+                <div class="flex items-start">
+                  <i class="fas fa-check-circle text-green-500 mt-1 mr-3"></i>
+                  <p class="text-gray-300">Designed and optimized database schemas and queries for MongoDB and MySQL</p>
+                </div>
+                <div class="flex items-start">
+                  <i class="fas fa-check-circle text-green-500 mt-1 mr-3"></i>
+                  <p class="text-gray-300">Collaborated with frontend developers to integrate APIs and improve user experience</p>
+                </div>
+                <div class="flex items-start">
+                  <i class="fas fa-check-circle text-green-500 mt-1 mr-3"></i>
+                  <p class="text-gray-300">Participated in code reviews and implemented best practices for clean, maintainable code</p>
+                </div>
+              </div>
+              
+              <div class="mt-6 flex flex-wrap gap-2">
+                <span class="px-3 py-1 rounded-full text-sm font-medium bg-gray-700 text-gray-200">Spring Boot</span>
+                <span class="px-3 py-1 rounded-full text-sm font-medium bg-gray-700 text-gray-200">Java</span>
+                <span class="px-3 py-1 rounded-full text-sm font-medium bg-gray-700 text-gray-200">REST APIs</span>
+                <span class="px-3 py-1 rounded-full text-sm font-medium bg-gray-700 text-gray-200">MongoDB</span>
+                <span class="px-3 py-1 rounded-full text-sm font-medium bg-gray-700 text-gray-200">MySQL</span>
+                <span class="px-3 py-1 rounded-full text-sm font-medium bg-gray-700 text-gray-200">Git</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  
+  <!-- Skills Section -->
+  <section id="skills" class="min-h-screen py-20 bg-gray-800">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-16">
+        <h2 class="text-3xl md:text-4xl font-bold mb-4 fade-in">
+          <span class="gradient-text">My Skills</span>
+        </h2>
+        <div class="max-w-3xl mx-auto fade-in">
+          <p class="text-lg text-gray-300">
+            A comprehensive toolkit that enables me to build robust, scalable applications
+          </p>
+        </div>
+      </div>
+      
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <!-- Languages -->
+        <div class="skill-card p-6 rounded-xl bg-gray-900 shadow-xl transition-all duration-300 hover:shadow-2xl hover:scale-105 fade-in glow">
+          <div class="flex items-center mb-4">
+            <div class="w-12 h-12 rounded-full bg-gradient-to-r from-purple-500 via-blue-500 to-teal-500 flex items-center justify-center text-white">
+              <i class="fas fa-code text-xl"></i>
+            </div>
+            <h3 class="ml-4 text-xl font-bold text-white">Languages</h3>
+          </div>
+          <div class="flex flex-wrap gap-2">
+            <span class="skill-tag px-3 py-1 rounded-full text-sm font-medium bg-gray-700 text-gray-200">Java</span>
+            <span class="skill-tag px-3 py-1 rounded-full text-sm font-medium bg-gray-700 text-gray-200">SQL</span>
+            <span class="skill-tag px-3 py-1 rounded-full text-sm font-medium bg-gray-700 text-gray-200">HTML 5</span>
+            <span class="skill-tag px-3 py-1 rounded-full text-sm font-medium bg-gray-700 text-gray-200">CSS3</span>
+            <span class="skill-tag px-3 py-1 rounded-full text-sm font-medium bg-gray-700 text-gray-200">JavaScript</span>
+          </div>
+        </div>
+        
+        <!-- Frameworks -->
+        <div class="skill-card p-6 rounded-xl bg-gray-900 shadow-xl transition-all duration-300 hover:shadow-2xl hover:scale-105 fade-in glow">
+          <div class="flex items-center mb-4">
+            <div class="w-12 h-12 rounded-full bg-gradient-to-r from-purple-500 via-blue-500 to-teal-500 flex items-center justify-center text-white">
+              <i class="fas fa-layer-group text-xl"></i>
+            </div>
+            <h3 class="ml-4 text-xl font-bold text-white">Frameworks</h3>
+          </div>
+          <div class="flex flex-wrap gap-2">
+            <span class="skill-tag px-3 py-1 rounded-full text-sm font-medium bg-gray-700 text-gray-200">Spring Boot</span>
+            <span class="skill-tag px-3 py-1 rounded-full text-sm font-medium bg-gray-700 text-gray-200">Bootstrap</span>
+            <span class="skill-tag px-3 py-1 rounded-full text-sm font-medium bg-gray-700 text-gray-200">Tailwind CSS</span>
+            <span class="skill-tag px-3 py-1 rounded-full text-sm font-medium bg-gray-700 text-gray-200">Hibernate</span>
+            <span class="skill-tag px-3 py-1 rounded-full text-sm font-medium bg-gray-700 text-gray-200">Collection Framework</span>
+          </div>
+        </div>
+        
+        <!-- Databases -->
+        <div class="skill-card p-6 rounded-xl bg-gray-900 shadow-xl transition-all duration-300 hover:shadow-2xl hover:scale-105 fade-in glow">
+          <div class="flex items-center mb-4">
+            <div class="w-12 h-12 rounded-full bg-gradient-to-r from-purple-500 via-blue-500 to-teal-500 flex items-center justify-center text-white">
+              <i class="fas fa-database text-xl"></i>
+            </div>
+            <h3 class="ml-4 text-xl font-bold text-white">Databases</h3>
+          </div>
+          <div class="flex flex-wrap gap-2">
+            <span class="skill-tag px-3 py-1 rounded-full text-sm font-medium bg-gray-700 text-gray-200">MySQL</span>
+            <span class="skill-tag px-3 py-1 rounded-full text-sm font-medium bg-gray-700 text-gray-200">MongoDB</span>
+            <span class="skill-tag px-3 py-1 rounded-full text-sm font-medium bg-gray-700 text-gray-200">Redis</span>
+          </div>
+        </div>
+        
+        <!-- Tools -->
+        <div class="skill-card p-6 rounded-xl bg-gray-900 shadow-xl transition-all duration-300 hover:shadow-2xl hover:scale-105 fade-in glow">
+          <div class="flex items-center mb-4">
+            <div class="w-12 h-12 rounded-full bg-gradient-to-r from-purple-500 via-blue-500 to-teal-500 flex items-center justify-center text-white">
+              <i class="fas fa-tools text-xl"></i>
+            </div>
+            <h3 class="ml-4 text-xl font-bold text-white">Tools</h3>
+          </div>
+          <div class="flex flex-wrap gap-2">
+            <span class="skill-tag px-3 py-1 rounded-full text-sm font-medium bg-gray-700 text-gray-200">IntelliJ IDE</span>
+            <span class="skill-tag px-3 py-1 rounded-full text-sm font-medium bg-gray-700 text-gray-200">VS Code</span>
+            <span class="skill-tag px-3 py-1 rounded-full text-sm font-medium bg-gray-700 text-gray-200">Postman</span>
+            <span class="skill-tag px-3 py-1 rounded-full text-sm font-medium bg-gray-700 text-gray-200">Git</span>
+            <span class="skill-tag px-3 py-1 rounded-full text-sm font-medium bg-gray-700 text-gray-200">Linux</span>
+            <span class="skill-tag px-3 py-1 rounded-full text-sm font-medium bg-gray-700 text-gray-200">GitHub</span>
+          </div>
+        </div>
+        
+        <!-- Backend -->
+        <div class="skill-card p-6 rounded-xl bg-gray-900 shadow-xl transition-all duration-300 hover:shadow-2xl hover:scale-105 fade-in glow">
+          <div class="flex items-center mb-4">
+            <div class="w-12 h-12 rounded-full bg-gradient-to-r from-purple-500 via-blue-500 to-teal-500 flex items-center justify-center text-white">
+              <i class="fas fa-server text-xl"></i>
+            </div>
+            <h3 class="ml-4 text-xl font-bold text-white">Backend</h3>
+          </div>
+          <div class="flex flex-wrap gap-2">
+            <span class="skill-tag px-3 py-1 rounded-full text-sm font-medium bg-gray-700 text-gray-200">RESTful APIs</span>
+            <span class="skill-tag px-3 py-1 rounded-full text-sm font-medium bg-gray-700 text-gray-200">Spring Security</span>
+            <span class="skill-tag px-3 py-1 rounded-full text-sm font-medium bg-gray-700 text-gray-200">JWT</span>
+            <span class="skill-tag px-3 py-1 rounded-full text-sm font-medium bg-gray-700 text-gray-200">Swagger</span>
+            <span class="skill-tag px-3 py-1 rounded-full text-sm font-medium bg-gray-700 text-gray-200">Kafka</span>
+          </div>
+        </div>
+        
+        <!-- Concepts -->
+        <div class="skill-card p-6 rounded-xl bg-gray-900 shadow-xl transition-all duration-300 hover:shadow-2xl hover:scale-105 fade-in glow">
+          <div class="flex items-center mb-4">
+            <div class="w-12 h-12 rounded-full bg-gradient-to-r from-purple-500 via-blue-500 to-teal-500 flex items-center justify-center text-white">
+              <i class="fas fa-microchip text-xl"></i>
+            </div>
+            <h3 class="ml-4 text-xl font-bold text-white">Concepts</h3>
+          </div>
+          <div class="flex flex-wrap gap-2">
+            <span class="skill-tag px-3 py-1 rounded-full text-sm font-medium bg-gray-700 text-gray-200">OOP</span>
+            <span class="skill-tag px-3 py-1 rounded-full text-sm font-medium bg-gray-700 text-gray-200">SOLID Principles</span>
+            <span class="skill-tag px-3 py-1 rounded-full text-sm font-medium bg-gray-700 text-gray-200">MVC Architecture</span>
+            <span class="skill-tag px-3 py-1 rounded-full text-sm font-medium bg-gray-700 text-gray-200">JUnit</span>
+            <span class="skill-tag px-3 py-1 rounded-full text-sm font-medium bg-gray-700 text-gray-200">Soft Skills</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  
+  <!-- Projects Section -->
+  <section id="projects" class="min-h-screen py-20 bg-gray-900 relative">
+    <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-16">
+        <h2 class="text-3xl md:text-4xl font-bold mb-4 fade-in">
+          <span class="gradient-text">My Projects</span>
+        </h2>
+        <div class="max-w-3xl mx-auto fade-in">
+          <p class="text-lg text-gray-300">
+            Showcasing my work and technical expertise through real-world applications
+          </p>
+        </div>
+      </div>
+      
+      <div class="relative">
+        <div class="h-[600px] w-full flex items-center justify-center">
+          <div id="project-carousel" class="w-full max-w-3xl">
+            <!-- Project 1 -->
+            <div class="project-card p-6 rounded-xl bg-gray-900 text-white shadow-2xl">
+              <h3 class="text-2xl font-bold mb-2 gradient-text">
+                <i class="fas fa-school mr-2"></i> Abu-Hanan's Urban School
+              </h3>
+              <div class="flex items-center text-sm mb-4">
+                <span class="text-gray-300">01/2025-03/2025 • Hyderabad City, Pakistan</span>
+              </div>
+              <p class="mb-4 text-gray-300">
+                A comprehensive web-based School Management System built with Spring Boot, Spring Security, MongoDB Atlas, and Thymeleaf, featuring dedicated portals for Admin, Student, Teacher, and Manager. The system integrates RESTful APIs, Role-Based Authorization, JWT Authentication, and Redis caching for performance.
+              </p>
+              <div class="flex flex-wrap gap-2 mb-4">
+                <span class="px-2 py-1 rounded-full text-xs font-medium bg-gray-800 text-gray-200">Spring Boot</span>
+                <span class="px-2 py-1 rounded-full text-xs font-medium bg-gray-800 text-gray-200">MongoDB</span>
+                <span class="px-2 py-1 rounded-full text-xs font-medium bg-gray-800 text-gray-200">Spring Security</span>
+                <span class="px-2 py-1 rounded-full text-xs font-medium bg-gray-800 text-gray-200">JWT</span>
+                <span class="px-2 py-1 rounded-full text-xs font-medium bg-gray-800 text-gray-200">Redis</span>
+                <span class="px-2 py-1 rounded-full text-xs font-medium bg-gray-800 text-gray-200">Thymeleaf</span>
+              </div>
+              <div class="flex space-x-4">
+                <a href="https://abuhananurbanschool.netlify.app/" target="_blank" class="gradient-button px-4 py-2 rounded-md text-sm font-medium flex items-center">
+                  <i class="fas fa-external-link-alt mr-2"></i> View Project
+                </a>
+                <a href="https://github.com/Muhammad-Muzamil1" target="_blank" class="border border-gray-600 text-gray-300 px-4 py-2 rounded-md text-sm font-medium flex items-center">
+                  <i class="fab fa-github mr-2"></i> Source Code
+                </a>
+              </div>
+            </div>
+            
+            <!-- Project 2 -->
+            <div class="project-card p-6 rounded-xl bg-gray-900 text-white shadow-2xl hidden">
+              <h3 class="text-2xl font-bold mb-2 gradient-text">
+                <i class="fas fa-university mr-2"></i> University Entry Test System
+              </h3>
+              <div class="flex items-center text-sm mb-4">
+                <span class="text-gray-300">02/2024-03/2024 • University Project</span>
+              </div>
+              <p class="mb-4 text-gray-300">
+                A Java-based desktop application built using JavaFX, Java Swing, and MySQL, designed to streamline university entry test management. The system features admin and student portals, where admins can create and manage test questions, set exam schedules, and evaluate results, while students can register, attempt tests, and view scores.
+              </p>
+              <div class="flex flex-wrap gap-2 mb-4">
+                <span class="px-2 py-1 rounded-full text-xs font-medium bg-gray-800 text-gray-200">Java</span>
+                <span class="px-2 py-1 rounded-full text-xs font-medium bg-gray-800 text-gray-200">JavaFX</span>
+                <span class="px-2 py-1 rounded-full text-xs font-medium bg-gray-800 text-gray-200">Java Swing</span>
+                <span class="px-2 py-1 rounded-full text-xs font-medium bg-gray-800 text-gray-200">MySQL</span>
+                <span class="px-2 py-1 rounded-full text-xs font-medium bg-gray-800 text-gray-200">JDBC</span>
+              </div>
+              <div class="flex space-x-4">
+                <button class="gradient-button px-4 py-2 rounded-md text-sm font-medium flex items-center">
+                  <i class="fas fa-external-link-alt mr-2"></i> View Project
+                </button>
+                <a href="https://github.com/Muhammad-Muzamil1" target="_blank" class="border border-gray-600 text-gray-300 px-4 py-2 rounded-md text-sm font-medium flex items-center">
+                  <i class="fab fa-github mr-2"></i> Source Code
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <div class="absolute bottom-4 left-0 right-0 flex justify-center space-x-4">
+          <button id="prev-project" class="rounded-full bg-gray-800 text-white p-2">
+            <i class="fas fa-chevron-left"></i>
+          </button>
+          <div class="flex space-x-2">
+            <button class="project-dot w-3 h-3 rounded-full bg-gradient-to-r from-purple-500 via-blue-500 to-teal-500" data-index="0"></button>
+            <button class="project-dot w-3 h-3 rounded-full bg-gray-700" data-index="1"></button>
+          </div>
+          <button id="next-project" class="rounded-full bg-gray-800 text-white p-2">
+            <i class="fas fa-chevron-right"></i>
+          </button>
+        </div>
+      </div>
+    </div>
+  </section>
+  
+  <!-- Contact Section -->
+  <section id="contact" class="min-h-screen py-20 bg-gray-800">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-16">
+        <h2 class="text-3xl md:text-4xl font-bold mb-4 fade-in">
+          <span class="gradient-text">Get In Touch</span>
+        </h2>
+        <div class="max-w-3xl mx-auto fade-in">
+          <p class="text-lg text-gray-300">
+            Have a project in mind or want to discuss opportunities? I'd love to hear from you!
+          </p>
+        </div>
+      </div>
+      
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
+        <div class="p-8 rounded-xl bg-gray-900 shadow-xl slide-in-left glow">
+          <h3 class="text-2xl font-bold mb-6 gradient-text">
+            <i class="fas fa-address-card mr-2"></i> Contact Information
+          </h3>
+          <div class="space-y-6">
+            <!-- Email -->
+            <a href="mailto:muhammadmuzamilumrani@gmail.com" target="_blank" rel="noopener noreferrer" class="flex items-start space-x-4 p-4 rounded-lg bg-gray-800 hover:bg-gray-700 transition-all duration-300">
+              <div class="w-12 h-12 rounded-full bg-gradient-to-r from-purple-500 via-blue-500 to-teal-500 flex items-center justify-center text-white">
+                <i class="fas fa-envelope text-xl"></i>
+              </div>
+              <div>
+                <h4 class="text-lg font-semibold text-white">Email</h4>
+                <p class="text-gray-300">muhammadmuzamilumrani@gmail.com</p>
+              </div>
+            </a>
+            
+            <!-- Phone -->
+            <a href="tel:03147419170" target="_blank" rel="noopener noreferrer" class="flex items-start space-x-4 p-4 rounded-lg bg-gray-800 hover:bg-gray-700 transition-all duration-300">
+              <div class="w-12 h-12 rounded-full bg-gradient-to-r from-purple-500 via-blue-500 to-teal-500 flex items-center justify-center text-white">
+                <i class="fas fa-phone-alt text-xl"></i>
+              </div>
+              <div>
+                <h4 class="text-lg font-semibold text-white">Phone</h4>
+                <p class="text-gray-300">03147419170</p>
+              </div>
+            </a>
+            
+            <!-- Location -->
+            <a href="https://maps.google.com/?q=Hyderabad,Sindh,Pakistan" target="_blank" rel="noopener noreferrer" class="flex items-start space-x-4 p-4 rounded-lg bg-gray-800 hover:bg-gray-700 transition-all duration-300">
+              <div class="w-12 h-12 rounded-full bg-gradient-to-r from-purple-500 via-blue-500 to-teal-500 flex items-center justify-center text-white">
+                <i class="fas fa-map-marker-alt text-xl"></i>
+              </div>
+              <div>
+                <h4 class="text-lg font-semibold text-white">Location</h4>
+                <p class="text-gray-300">Hyderabad, Sindh, Pakistan</p>
+              </div>
+            </a>
+          </div>
+          
+          <div class="mt-8">
+            <h4 class="text-lg font-semibold mb-4 text-white">Connect With Me</h4>
+            <div class="flex space-x-4">
+              <a href="https://www.linkedin.com/in/muhammad-muzamil-b69b5b299" target="_blank" class="social-icon w-12 h-12 rounded-full bg-blue-600 flex items-center justify-center text-white hover:bg-blue-700">
+                <i class="fab fa-linkedin-in text-xl"></i>
+              </a>
+              <a href="https://github.com/Muhammad-Muzamil1" target="_blank" class="social-icon w-12 h-12 rounded-full bg-gray-700 flex items-center justify-center text-white hover:bg-gray-600">
+                <i class="fab fa-github text-xl"></i>
+              </a>
+            </div>
+          </div>
+        </div>
+        
+        <div class="p-8 rounded-xl bg-gray-900 shadow-xl slide-in-right glow">
+          <h3 class="text-2xl font-bold mb-6 gradient-text">
+            <i class="fas fa-paper-plane mr-2"></i> Send Me a Message
+          </h3>
+          <form id="contact-form" class="space-y-6">
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <div class="space-y-2">
+                <label for="name" class="text-white">Your Name</label>
+                <input id="name" name="name" required class="w-full px-3 py-2 bg-gray-800 border border-gray-700 text-white rounded-md focus:outline-none focus:ring-2 focus:ring-purple-500">
+              </div>
+              <div class="space-y-2">
+                <label for="email" class="text-white">Your Email</label>
+                <input id="email" name="email" type="email" required class="w-full px-3 py-2 bg-gray-800 border border-gray-700 text-white rounded-md focus:outline-none focus:ring-2 focus:ring-purple-500">
+              </div>
+            </div>
+            <div class="space-y-2">
+              <label for="subject" class="text-white">Subject</label>
+              <input id="subject" name="subject" required class="w-full px-3 py-2 bg-gray-800 border border-gray-700 text-white rounded-md focus:outline-none focus:ring-2 focus:ring-purple-500">
+            </div>
+            <div class="space-y-2">
+              <label for="message" class="text-white">Message</label>
+              <textarea id="message" name="message" required rows="5" class="w-full px-3 py-2 bg-gray-800 border border-gray-700 text-white rounded-md focus:outline-none focus:ring-2 focus:ring-purple-500"></textarea>
+            </div>
+            <button type="submit" id="submit-button" class="w-full gradient-button py-3 rounded-md font-medium flex items-center justify-center">
+              <i class="fas fa-paper-plane mr-2"></i> Send Message
+            </button>
+            <div id="form-success" class="hidden mt-4 p-3 rounded-md bg-green-500/20 text-green-500 text-center">
+              Message sent successfully! I'll get back to you soon.
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+    
+    <div class="mt-20 text-center">
+      <p class="text-sm text-gray-400">
+        © <span id="current-year"></span> Muhammad Muzamil. All rights reserved.
+      </p>
+    </div>
+  </section>
+  
+  <!-- JavaScript -->
+  <script>
+    // Set current year
+    document.getElementById('current-year').textContent = new Date().getFullYear();
+    
+    // Theme Toggle
+    const themeToggle = document.getElementById('theme-toggle');
+    const body = document.body;
+    let isDarkTheme = true;
+    
+    themeToggle.addEventListener('click', () => {
+      isDarkTheme = !isDarkTheme;
+      
+      if (isDarkTheme) {
+        body.classList.remove('light-mode');
+        themeToggle.innerHTML = '<i class="fas fa-sun text-yellow-400 text-xl"></i>';
+      } else {
+        body.classList.add('light-mode');
+        themeToggle.innerHTML = '<i class="fas fa-moon text-blue-600 text-xl"></i>';
+      }
+      
+      // Update all theme-dependent elements
+      updateThemeElements();
+    });
+    
+    function updateThemeElements() {
+      const navbar = document.getElementById('navbar');
+      const navLinks = document.querySelectorAll('.nav-link');
+      const mobileMenu = document.getElementById('mobile-menu');
+      
+      if (isDarkTheme) {
+        navbar.classList.remove('bg-white/80');
+        navbar.classList.add('bg-gray-900/80');
+        mobileMenu.classList.remove('bg-white');
+        mobileMenu.classList.add('bg-gray-800');
+        
+        navLinks.forEach(link => {
+          link.classList.remove('text-gray-700');
+          link.classList.add('text-gray-300');
+        });
+      } else {
+        navbar.classList.remove('bg-gray-900/80');
+        navbar.classList.add('bg-white/80');
+        mobileMenu.classList.remove('bg-gray-800');
+        mobileMenu.classList.add('bg-white');
+        
+        navLinks.forEach(link => {
+          link.classList.remove('text-gray-300');
+          link.classList.add('text-gray-700');
+        });
+      }
+    }
+    
+    // Mobile Menu Toggle
+    const mobileMenuButton = document.getElementById('mobile-menu-button');
+    const mobileMenu = document.getElementById('mobile-menu');
+    const menuIcon = document.getElementById('menu-icon');
+    const closeIcon = document.getElementById('close-icon');
+    
+    mobileMenuButton.addEventListener('click', () => {
+      mobileMenu.classList.toggle('open');
+      menuIcon.classList.toggle('hidden');
+      closeIcon.classList.toggle('hidden');
+    });
+    
+    // Close mobile menu when clicking on a link
+    const mobileMenuLinks = mobileMenu.querySelectorAll('a');
+    mobileMenuLinks.forEach(link => {
+      link.addEventListener('click', () => {
+        mobileMenu.classList.remove('open');
+        menuIcon.classList.remove('hidden');
+        closeIcon.classList.add('hidden');
+      });
+    });
+    
+    // Navbar scroll effect
+    window.addEventListener('scroll', () => {
+      const navbar = document.getElementById('navbar');
+      if (window.scrollY > 50) {
+        if (isDarkTheme) {
+          navbar.classList.add('bg-gray-900/80', 'backdrop-blur-md', 'shadow-lg');
+        } else {
+          navbar.classList.add('bg-white/80', 'backdrop-blur-md', 'shadow-lg');
+        }
+      } else {
+        navbar.classList.remove('bg-gray-900/80', 'bg-white/80', 'backdrop-blur-md', 'shadow-lg');
+      }
+    });
+    
+    // Progress bar
+    window.addEventListener('scroll', () => {
+      const totalHeight = document.documentElement.scrollHeight - window.innerHeight;
+      const progress = (window.scrollY / totalHeight) * 100;
+      document.getElementById('progress-bar').style.width = `${progress}%`;
+    });
+    
+    // Scroll animations
+    const fadeElements = document.querySelectorAll('.fade-in');
+    const slideLeftElements = document.querySelectorAll('.slide-in-left');
+    const slideRightElements = document.querySelectorAll('.slide-in-right');
+    
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('active');
+        }
+      });
+    }, { threshold: 0.1 });
+    
+    fadeElements.forEach(element => {
+      observer.observe(element);
+    });
+    
+    slideLeftElements.forEach(element => {
+      observer.observe(element);
+    });
+    
+    slideRightElements.forEach(element => {
+      observer.observe(element);
+    });
+    
+    // Project Carousel
+    const projectCards = document.querySelectorAll('.project-card');
+    const projectDots = document.querySelectorAll('.project-dot');
+    const prevButton = document.getElementById('prev-project');
+    const nextButton = document.getElementById('next-project');
+    let currentProject = 0;
+    
+    function showProject(index) {
+      projectCards.forEach((card, i) => {
+        if (i === index) {
+          card.classList.remove('hidden');
+          card.classList.add('active');
+        } else {
+          card.classList.add('hidden');
+          card.classList.remove('active');
+        }
+      });
+      
+      projectDots.forEach((dot, i) => {
+        if (i === index) {
+          dot.classList.remove('bg-gray-700');
+          dot.classList.add('bg-gradient-to-r', 'from-purple-500', 'via-blue-500', 'to-teal-500');
+        } else {
+          dot.classList.add('bg-gray-700');
+          dot.classList.remove('bg-gradient-to-r', 'from-purple-500', 'via-blue-500', 'to-teal-500');
+        }
+      });
+      
+      currentProject = index;
+    }
+    
+    prevButton.addEventListener('click', () => {
+      const newIndex = currentProject === 0 ? projectCards.length - 1 : currentProject - 1;
+      showProject(newIndex);
+    });
+    
+    nextButton.addEventListener('click', () => {
+      const newIndex = currentProject === projectCards.length - 1 ? 0 : currentProject + 1;
+      showProject(newIndex);
+    });
+    
+    projectDots.forEach((dot, i) => {
+      dot.addEventListener('click', () => {
+        showProject(i);
+      });
+    });
+    
+    // Initialize first project
+    showProject(0);
+    
+    // Contact Form
+    const contactForm = document.getElementById('contact-form');
+    const submitButton = document.getElementById('submit-button');
+    const formSuccess = document.getElementById('form-success');
+    
+    contactForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+      
+      // Simulate form submission
+      submitButton.innerHTML = '<i class="fas fa-spinner fa-spin mr-2"></i> Sending...';
+      submitButton.disabled = true;
+      
+      setTimeout(() => {
+        submitButton.innerHTML = '<i class="fas fa-paper-plane mr-2"></i> Send Message';
+        submitButton.disabled = false;
+        formSuccess.classList.remove('hidden');
+        contactForm.reset();
+        
+        setTimeout(() => {
+          formSuccess.classList.add('hidden');
+        }, 3000);
+      }, 1500);
+    });
+    
+    // Download Resume
+    document.getElementById('download-resume').addEventListener('click', () => {
+      // In a real implementation, this would download the actual resume
+      const link = document.createElement('a');
+      link.href = '/resume.pdf'; // This would be the actual path to the resume
+      link.download = 'Muhammad_Muzamil_Resume.pdf';
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+    });
+    
+    // Make all elements visible when the page loads
+    document.addEventListener('DOMContentLoaded', function() {
+      // Activate all fade-in elements immediately
+      fadeElements.forEach(element => {
+        element.classList.add('active');
+      });
+      
+      // Activate all slide-in elements immediately
+      slideLeftElements.forEach(element => {
+        element.classList.add('active');
+      });
+      
+      slideRightElements.forEach(element => {
+        element.classList.add('active');
+      });
+      
+      // Show the first project
+      showProject(0);
+    });
+  </script>
+</body>
+</html>
