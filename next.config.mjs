@@ -1,16 +1,13 @@
 const isProd = process.env.NODE_ENV === 'production';
-const repoName = 'v0-unique-portfolio-website'; // 🔁 your repo name
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  output: 'export', // needed for static export
+  output: 'export', // for static export
   images: {
-    unoptimized: true, // GitHub Pages doesn’t support image optimization
+    unoptimized: true, // required for GitHub Pages or static hosting
   },
-  basePath: isProd ? `/${repoName}` : '',
-  assetPrefix: isProd ? `/${repoName}/` : '',
 
-  // ✅ Optional: ignore build-time lint/type errors (useful in CI)
+  // 🚫 Removed basePath and assetPrefix for custom domain deployment
   eslint: {
     ignoreDuringBuilds: true,
   },
